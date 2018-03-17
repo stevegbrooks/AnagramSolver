@@ -8,7 +8,7 @@ public class Theory {
 	public static void main(String[] args) {
 		HashMap<Integer, String> hm = new HashMap<>();
 		
-		String[] stuffToAdd = {"zeke", "harry", "astronaut", "dweevel", "citizen", "thorn"};
+		String[] stuffToAdd = {"zeke", "harry", "astronaut", "dweevel", "citizen", "thorn", "Ji"};
 		int[] hashCodes = new int[stuffToAdd.length];
 		int[] bucketNumbers = new int[stuffToAdd.length];
 		

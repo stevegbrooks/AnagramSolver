@@ -36,7 +36,7 @@ public class MyHashSet<E> {
 		int bucketNumber = hashCode % tableLength;
 		if (bucketNumber < 0) { bucketNumber += tableLength; }
 		
-		if (buckets.get(bucketNumber) == null) {
+		if (buckets.get(bucketNumber).size() == 0) {
 			return false;
 		} else {
 			for (E element : buckets.get(bucketNumber)) {
