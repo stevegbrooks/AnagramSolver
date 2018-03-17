@@ -9,29 +9,32 @@ public class MyHashSet<E> {
 	private final int DEFAULT_LENGTH = 16;
 	
 	public MyHashSet() {
-		this.buckets = new ArrayList<>(DEFAULT_LENGTH);
+		buckets = new ArrayList<>();
 		size = 0;
 		tableLength = DEFAULT_LENGTH;
 		
-		for (LinkedList<E> bucket : buckets) {
-			bucket = new LinkedList<E>();
+		for (int i = 0; i < tableLength; i++) {
+			LinkedList<E> bucket = new LinkedList<E>();
+			buckets.add(bucket);
 		}
 	}
 	
 	public MyHashSet(int initialLength) {
-		this.buckets = new ArrayList<>(initialLength);
+		buckets = new ArrayList<>();
 		size = 0;
 		tableLength = initialLength;
 		
-		for (LinkedList<E> bucket : buckets) {
-			bucket = new LinkedList<E>();
+		for (int i = 0; i < tableLength; i++) {
+			LinkedList<E> bucket = new LinkedList<E>();
+			buckets.add(bucket);
 		}
 	}
 	
 	public boolean contains(E e) {
+		
 		int hashCode = e.hashCode();
-		if (hashCode < 0) { hashCode = -hashCode; }
 		int bucketNumber = hashCode % tableLength;
+		if (bucketNumber < 0) { bucketNumber += tableLength; }
 		
 		if (buckets.get(bucketNumber) == null) {
 			return false;
@@ -49,8 +52,8 @@ public class MyHashSet<E> {
 		if (contains(e) == false) {
 
 			int hashCode = e.hashCode();
-			if (hashCode < 0) { hashCode = -hashCode; }
 			int bucketNumber = hashCode % tableLength;
+			if (bucketNumber < 0) { bucketNumber += tableLength; }
 			buckets.get(bucketNumber).add(e);
 			size++;
 			
@@ -64,7 +67,14 @@ public class MyHashSet<E> {
 	}
 	
 	public boolean remove(E e) {
-		size--;
+		if (contains(e) == true) {
+			int hashCode = e.hashCode();
+			int bucketNumber = hashCode % tableLength;
+			if (bucketNumber < 0) { bucketNumber += tableLength; }
+			buckets.get(bucketNumber).remove(e);
+			size--;
+			return true;
+		}
 		return false;
 	}
 	
@@ -80,15 +90,19 @@ public class MyHashSet<E> {
 		int newLength = (tableLength * 2) - 1;
 		
 		ArrayList<LinkedList<E>> newBuckets = new ArrayList<>(newLength);
+		for (int i = 0; i < newLength; i++) {
+			LinkedList<E> newBucket = new LinkedList<E>();
+			newBuckets.add(newBucket);
+		}
 		
 		for (LinkedList<E> bucket : buckets) {
 			if (buckets != null) {
-				for (E element : bucket) {
-					int hashCode = element.hashCode();
-					if (hashCode < 0) { hashCode = -hashCode; }
-					
-					int newBucketNumber = hashCode % newLength;
-					newBuckets.get(newBucketNumber).add(element);
+				for (E e : bucket) {
+					int hashCode = e.hashCode();
+					int newBucketNumber = hashCode % tableLength;
+					if (newBucketNumber < 0) { newBucketNumber += tableLength; }
+
+					newBuckets.get(newBucketNumber).add(e);
 				}
 			}
 		}
