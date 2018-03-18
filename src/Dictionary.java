@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Dictionary {
@@ -22,8 +23,8 @@ public class Dictionary {
 				wordSet.add(word);
 			}
 			in.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (FileNotFoundException fnfe) {
+			fnfe.getMessage();
 		}
 	}
 	

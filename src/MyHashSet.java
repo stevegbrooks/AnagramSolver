@@ -86,7 +86,7 @@ public class MyHashSet<E> {
 		return (double) size/tableLength;
 	}
 	
-	private void reHash(ArrayList<LinkedList<E>> buckets) {
+	private void reHash(ArrayList<LinkedList<E>> oldBuckets) {
 		int newLength = (tableLength * 2) - 1;
 		
 		ArrayList<LinkedList<E>> newBuckets = new ArrayList<>(newLength);
@@ -95,9 +95,9 @@ public class MyHashSet<E> {
 			newBuckets.add(newBucket);
 		}
 		
-		for (LinkedList<E> bucket : buckets) {
-			if (buckets != null) {
-				for (E e : bucket) {
+		for (LinkedList<E> oldBucket : oldBuckets) {
+			if (oldBuckets != null) {
+				for (E e : oldBucket) {
 					int hashCode = e.hashCode();
 					int newBucketNumber = hashCode % tableLength;
 					if (newBucketNumber < 0) { newBucketNumber += tableLength; }
