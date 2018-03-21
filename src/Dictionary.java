@@ -39,4 +39,12 @@ public class Dictionary {
 		String wordToCheck = s.toLowerCase();
 		return wordSet.contains(wordToCheck);
 	}
+	
+	public int size() {
+		return wordSet.size();
+	}
+	
+	public double loadFactor() {
+		return wordSet.loadFactor();
+	}
 }

@@ -99,8 +99,8 @@ public class MyHashSet<E> {
 			if (oldBuckets != null) {
 				for (E e : oldBucket) {
 					int hashCode = e.hashCode();
-					int newBucketNumber = hashCode % tableLength;
-					if (newBucketNumber < 0) { newBucketNumber += tableLength; }
+					int newBucketNumber = hashCode % newLength;
+					if (newBucketNumber < 0) { newBucketNumber += newLength; }
 
 					newBuckets.get(newBucketNumber).add(e);
 				}
