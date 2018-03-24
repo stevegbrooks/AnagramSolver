@@ -1,6 +1,15 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
-
+/**
+ * This generic class allows one to implement a HashSet. It automatically resizes when the load factor
+ * is greater than 0.70. Its HashTable is implemented with an ArrayList of LinkedLists, where the 
+ * indices of the ArrayList refer to the HashTable buckets, and the LinkedLists hold the elements
+ * of the HashSet.
+ * 
+ * @author sgb
+ *
+ * @param <E>
+ */
 public class MyHashSet<E> {
 	
 	private ArrayList<LinkedList<E>> buckets;
@@ -8,6 +17,9 @@ public class MyHashSet<E> {
 	private int tableLength;
 	private final int DEFAULT_LENGTH = 16;
 	
+	/**
+	 * No argument constructor. Creates a HashTable of length 16.
+	 */
 	public MyHashSet() {
 		buckets = new ArrayList<>();
 		size = 0;
@@ -18,7 +30,10 @@ public class MyHashSet<E> {
 			buckets.add(bucket);
 		}
 	}
-	
+	/**
+	 * This constructor creates a HashTable of a specified length.
+	 * @param initialLength
+	 */
 	public MyHashSet(int initialLength) {
 		buckets = new ArrayList<>();
 		size = 0;
@@ -29,7 +44,11 @@ public class MyHashSet<E> {
 			buckets.add(bucket);
 		}
 	}
-	
+	/**
+	 * This method checks if an element specified exists within the HashSet. 
+	 * @param e an element to look for
+	 * @return true if the element exists, false otherwise.
+	 */
 	public boolean contains(E e) {
 		
 		int hashCode = e.hashCode();
@@ -47,7 +66,11 @@ public class MyHashSet<E> {
 			return false;
 		}
 	}
-	
+	/**
+	 * This method adds an element to the HashSet. 
+	 * @param e the element to add.
+	 * @return true if the add was successful, false if the HashSet already contains the element.
+	 */
 	public boolean add(E e) {
 		if (contains(e) == false) {
 
@@ -65,7 +88,11 @@ public class MyHashSet<E> {
 		}
 		return false;
 	}
-	
+	/**
+	 * This method removes an element from the HashSet.
+	 * @param e the element to remove
+	 * @return true if the element was successfully removed, false otherwise.
+	 */
 	public boolean remove(E e) {
 		if (contains(e) == true) {
 			int hashCode = e.hashCode();
@@ -77,15 +104,25 @@ public class MyHashSet<E> {
 		}
 		return false;
 	}
-	
+	/**
+	 * @return the number of elements in the HashSet
+	 */
 	public int size() {
 		return size;
 	}
-	
+	/**
+	 * @return the current load factor of the HashSet
+	 */
 	public double loadFactor() {
 		return (double) size/tableLength;
 	}
-	
+	/**
+	 * This helper function roughly doubles the length of the HashTable. 
+	 * It must first instantiate a new HashSet, and then fill it with the elements
+	 * from the old HashSet. It runs in O(n) time.
+	 *  
+	 * @param oldBuckets the HashSet to be reHashed.
+	 */
 	private void reHash(ArrayList<LinkedList<E>> oldBuckets) {
 		int newLength = (tableLength * 2) - 1;
 		

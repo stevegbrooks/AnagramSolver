@@ -1,12 +1,22 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
+/**
+ * This file holds a 'MyHashSet' of strings to be used a dictionary
+ * by the AnagramSolver class.
+ * @author sgb
+ *
+ */
 public class Dictionary {
 	
 	private String fileName;
 	private MyHashSet<String> wordSet;
 	
+	/**
+	 * The constructor. Takes in a file name to indicate the list
+	 * of words you want to use as a dictionary.
+	 * @param fileName
+	 */
 	public Dictionary(String fileName) {
 		this.fileName = fileName;
 		wordSet = new MyHashSet<>();
