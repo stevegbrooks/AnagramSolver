@@ -98,15 +98,16 @@ public class AnagramSolver {
 					areMapsEqual = false;
 				}
 			}
-			
 			if (areMapsEqual && !wordCandidates.contains(current)) {
 				wordCandidates.add(current);
 			}
 		} else {
 			for (char c : letters) {
 				String old = current;
-				current = current + c;
-				getCombination(letters, current);
+				StringBuilder sb = new StringBuilder();
+				sb.append(current);
+				sb.append(c);
+				getCombination(letters, sb.toString());
 				current = old;
 			}
 		}
@@ -116,8 +117,11 @@ public class AnagramSolver {
 	 * the solveAnagram() method.
 	 */
 	public static void main(String[] args) {
+		//Create the Dictionary
 		AnagramSolver anagramSolver = new AnagramSolver("words.txt");
-		ArrayList<String> solutions = anagramSolver.solveAnagram("LUSODH");
+		//Enter the word you want to get un-jumbled
+		ArrayList<String> solutions = anagramSolver.solveAnagram("levid");
+		//Print the solutions, if there are any
 		if (solutions.size() == 0) { System.out.println("No solutions."); }
 		for (String s : solutions) {
 			System.out.println(s);

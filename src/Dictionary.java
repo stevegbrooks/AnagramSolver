@@ -22,7 +22,9 @@ public class Dictionary {
 		wordSet = new MyHashSet<>();
 		readFile();
 	}
-	
+	/**
+	 * Reads in a text file for the dictionary and stores it into a MyHashSet object.
+	 */
 	private void readFile() {
 		try {
 			File inputFile = new File(fileName);
